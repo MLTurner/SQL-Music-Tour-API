@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     allowNull: false,
     },
     genre: {
-    DataTypes.TEXT, 
+    type: DataTypes.TEXT, 
     allowNull: false,
     },
     available_start_time: {
@@ -34,9 +34,12 @@ module.exports = (sequelize, DataTypes) => {
     end_time: {
     type: DataTypes.DATE, 
     allowNull: false,
-  }, {
+    }, 
+  },
+    {
     sequelize,
     modelName: 'Band',
-  });
+  }
+  );
   return Band;
 };
