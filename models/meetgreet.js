@@ -40,17 +40,19 @@ module.exports = (sequelize, DataTypes) => {
     },
     meet_start_time: {
       type: DataTypes.DATE,
-      allowNull: false
+      allowNull: false,
+      defaultValue: DataTypes.NOW
     },
     meet_end_time: {
       type: DataTypes.DATE,
-      allowNull: false
+      allowNull: false,
+      defaultValue: DataTypes.NOW
     }
   }, {
     sequelize,
     modelName: 'MeetGreet',
     tableName: 'meet_greets',
-    timestamps: false
+    timestamps: false,
   })
-  return MeetGreet
-}
+  return MeetGreet;
+};
