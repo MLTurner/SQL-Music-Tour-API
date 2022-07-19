@@ -21,14 +21,16 @@ events.get("/", async (req, res) => {
 
 //FIND A SPECIFIC EVENT (SHOW)
 events.get("/:name", async (req, res) => {
+  console.log(req.params.name)
   try {
     const foundEvent = await Event.findOne({
-      where: { name: req.params.name },
+      where: {
+       name: [req.params.name] },
       include: [
         {
           model: MeetGreet,
           as: "meet_greets",
-          attributes: { exclude: ["event_id", "band_id"] },
+          attributes: { exclude: ["event_id"] },
           include: {
             model: Band,
             as: "band",

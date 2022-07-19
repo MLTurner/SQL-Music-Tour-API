@@ -21,9 +21,11 @@ stages.get("/", async (req, res) => {
 
 //FIND A SPECIFIC STAGE
 stages.get("/:name", async (req, res) => {
+  console.log(req.params.name)
   try {
     const foundStage = await Stage.findOne({
-      where: { stage_name: req.params.name },
+      where: {
+        name: [ req.params.name ]},
       include:{ 
           model: Event, 
           as: "events",
