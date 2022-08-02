@@ -1,8 +1,9 @@
 //Dependencies
 const events = require("express").Router();
 const db = require("../models");
-const { Event, Band, MeetGreet, SetTime, Stage } = db;
+const { Event, Band, MeetGreet, SetTime, Stage, StageEvent } = db;
 const { Op } = require("sequelize");
+const stageevent = require("../models/stageevent");
 
 //FIND ALL EVENTS (INDEX)
 events.get("/", async (req, res) => {
@@ -49,7 +50,15 @@ events.get("/:name", async (req, res) => {
           model: Stage,
           as: "stages",
           through: { attributes: [] },
-        },
+        //    include: [
+        //      {model: StageEvent, as: "stageevents"}
+        //    ]
+         },
+        // {
+        //   model: StageEvent,
+        //   as: "stageevent",
+        //   through: { attributes: []},
+        // }
       ],
     });
     res.status(200).json(foundEvent);

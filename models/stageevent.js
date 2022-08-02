@@ -1,7 +1,5 @@
 'use strict'
-const {
-  Model
-} = require('sequelize')
+const {Model} = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class StageEvent extends Model {
     /**
@@ -9,12 +7,25 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(Stage) {
+    static associate({ Stage, Event, StageEvent, }) {
       // define association here
+      //stage
+       StageEvent.hasOne(Stage, {
+        foreignKey: "stage_id",
+        as: "stage",
+        through: Stage,
+      })
+      //event
+      <StageEvent.hasOne(Event, {
+        foreignKey: "event_id",
+        as: "event",
+        through: Event,
+      })
+
     }
   };
   StageEvent.init({
-    stage_events_id: {
+    stage_event_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true

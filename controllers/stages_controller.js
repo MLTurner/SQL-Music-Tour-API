@@ -13,7 +13,7 @@ stages.get("/", async (req, res) => {
   }
 });
   
-
+  res.status(200).json(foundStages)
   } catch (error) {
     res.status(500).json(error);
   }
@@ -26,20 +26,23 @@ stages.get("/:name", async (req, res) => {
     const foundStage = await Stage.findOne({
       where: {
         name: [ req.params.name ]},
-      include:{ 
+      include:[
+        { 
           model: Event, 
           as: "events",
-          through: { attributes: [] }
+          through: { attributes: [] },
       },
-      order: [
-          [{ model: Event, as: "events" }, 'date', 'ASC'],
-      ]
-  })
-  res.status(200).json(foundStage)
+      // order: {[
+      //    [{ model: Event, as: "events" }, 'date', 'ASC'],
+      // ],
+    //]},
+    ]
+  });
+  res.status(200).json(foundStage);
 } catch (error) {
-  res.status(500).json(error)
+  res.status(500).json(error);
 }
-})
+});
 
 //CREATE A STAGE
 stages.post("/", async (req, res) => {
