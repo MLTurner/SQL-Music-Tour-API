@@ -24,8 +24,6 @@ module.exports = (sequelize, DataTypes) => {
   }
 
 
-
-
   Stage.init(
     {
       stage_id: {

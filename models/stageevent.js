@@ -7,20 +7,21 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ Stage, Event, StageEvent, }) {
+    static associate({  models }) {
       // define association here
+      //previously had Stage, Event, StageEvent in static associate({})
       //stage
-       StageEvent.hasOne(Stage, {
-        foreignKey: "stage_id",
-        as: "stage",
-        through: Stage,
-      })
-      //event
-      <StageEvent.hasOne(Event, {
-        foreignKey: "event_id",
-        as: "event",
-        through: Event,
-      })
+      //  StageEvent.hasOne(Stage, {
+      //   foreignKey: "stage_id",
+      //   as: "stage",
+      //   through: Stage,
+      // })
+      // //event
+      // StageEvent.hasOne(Event, {
+      //   foreignKey: "event_id",
+      //   as: "event",
+      //   through: Event,
+      // })
 
     }
   };

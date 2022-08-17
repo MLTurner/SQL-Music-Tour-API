@@ -49,12 +49,12 @@ module.exports = (sequelize, DataTypes) => {
       start_time: {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: DataTypes.NOW,
+        //defaultValue: DataTypes.NOW,
       },
       end_time: {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: DataTypes.NOW,
+        //defaultValue: DataTypes.NOW,
       },
     },
     {

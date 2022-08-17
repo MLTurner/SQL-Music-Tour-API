@@ -41,12 +41,12 @@ module.exports = (sequelize, DataTypes) => {
     meet_start_time: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: DataTypes.NOW
+      //defaultValue: DataTypes.NOW
     },
     meet_end_time: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: DataTypes.NOW
+      //defaultValue: DataTypes.NOW
     }
   }, {
     sequelize,

@@ -19,25 +19,32 @@ stages.get("/", async (req, res) => {
   }
 });
 
-//FIND A SPECIFIC STAGE
+//FIND A SPECIFIC STAGE (SHOW)
 stages.get("/:name", async (req, res) => {
   console.log(req.params.name)
   try {
     const foundStage = await Stage.findOne({
-      where: {
-        name: [ req.params.name ]},
-      include:[
-        { 
-          model: Event, 
+      where: { stage_name: req.params.name },
+      include: 
+        {
+          model: Event,
           as: "events",
-          through: { attributes: [] },
-      },
-      // order: {[
-      //    [{ model: Event, as: "events" }, 'date', 'ASC'],
-      // ],
-    //]},
-    ]
-  });
+          through: { attributes: [] }
+          //attributes: { exclude: ["event_id"] },
+          //include: {
+           // model: StageEvent,
+           // as: "stage_events",
+           // through: {attributes: [] },
+          //},
+        },
+        order: [
+          [{ model: Event, as: "events" }, 'date', 'ASC'],
+      ]
+  })
+      //order: {[
+        // [{ model: Event, as: "events" }, 'date', 'ASC'],
+     //],
+
   res.status(200).json(foundStage);
 } catch (error) {
   res.status(500).json(error);

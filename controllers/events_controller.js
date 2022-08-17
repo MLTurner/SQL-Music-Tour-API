@@ -9,24 +9,25 @@ const stageevent = require("../models/stageevent");
 events.get("/", async (req, res) => {
   try {
     const foundEvents = await Event.findAll({
-      order: [ [ 'date', 'ASC' ] ],
+      order: [["date", "ASC"]],
       where: {
-          name: { [Op.like]: `%${req.query.name ? req.query.name : ''}%` }
-      }
-  })
-  res.status(200).json(foundEvents)
-} catch (error) {
-  res.status(500).json(error)
-}
+        name: { [Op.like]: `%${req.query.name ? req.query.name : ""}%` },
+      },
+    });
+    res.status(200).json(foundEvents);
+  } catch (error) {
+    res.status(500).json(error);
+  }
 });
 
 //FIND A SPECIFIC EVENT (SHOW)
 events.get("/:name", async (req, res) => {
-  console.log(req.params.name)
+  console.log(req.params.name);
   try {
     const foundEvent = await Event.findOne({
       where: {
-       name: [req.params.name] },
+        name: req.params.name,
+      },
       include: [
         {
           model: MeetGreet,
@@ -50,19 +51,34 @@ events.get("/:name", async (req, res) => {
           model: Stage,
           as: "stages",
           through: { attributes: [] },
-        //    include: [
-        //      {model: StageEvent, as: "stageevents"}
-        //    ]
-         },
-        // {
-        //   model: StageEvent,
-        //   as: "stageevent",
-        //   through: { attributes: []},
-        // }
+
+          //include: [
+           // {model: StageEvent, as: "stage_events",
+         /// through: {attributes: []},
+       // },
+      //]
+          ///as: ["stages", "event_id", "stage_events_id"],
+          //include: [
+          //  {model: StageEvent, as: "stages"} ]
+          //]
+
+          //through: { model: StageEvent, as: "event_id" },
+
+          //include: [
+          //{model: StageEvent, as: "stage_event"}
+          //]
+        },
+        /// {
+        //  model: StageEvent,
+        //  as: "stageevent",
+        ///   through: { attributes: []},
+        //}
       ],
     });
+    console.log("success");
     res.status(200).json(foundEvent);
   } catch (error) {
+    console.log("failure");
     res.status(500).json(error);
   }
 });

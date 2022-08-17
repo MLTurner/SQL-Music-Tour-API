@@ -60,6 +60,10 @@ bands.get("/:name", async (req, res) => {
           },
         },
       ],
+      order: [
+        [{ model: MeetGreet, as: "meet_greets" }, { model: Event, as: "event" }, 'date', 'DESC'],
+        [{ model: SetTime, as: "set_times" }, { model: Event, as: "event" }, 'date', 'DESC']
+    ]
     });
     console.log('band we found!!!', foundBand)
     res.status(200).json(foundBand);
